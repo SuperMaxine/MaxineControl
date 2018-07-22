@@ -2,16 +2,18 @@
 import socket
 import sys
 import os
+def Socketsetup(ipaddress, port):
+        try:
+                sock.bind((ipaddress, port))  # 配置Socket，绑定IP地址和端口号
+        except socket.error as e:
+                print('Bind Failed...', e)
+                sys.exit(0)
 
 if __name__ == '__main__':
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # 创建Socket连接（TCP）
     print('Socket Created')
 
-    try:
-        sock.bind(('127.0.0.1', 8004))  # 配置Socket，绑定IP地址和端口号
-    except socket.error as e:
-        print('Bind Failed...', e)
-        sys.exit(0)
+    Socketsetup("127.0.0.1", 8000)
 
     sock.listen(5)  # 设置最大允许连接数，各连接和Server的通信遵循FIFO原则
 
